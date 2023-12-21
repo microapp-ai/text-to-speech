@@ -57,7 +57,7 @@ const TextToSpeech: FC = () => {
 
   const handleTextToSpeech = async () => {
     setLoading(true);
-    const response = await fetch('/api/textToSpeech', {
+    const response = await fetch('https://text-to-speech-blond.vercel.app/api/textToSpeech', {
       headers: {
         'Content-Type': 'application/json',
       },
