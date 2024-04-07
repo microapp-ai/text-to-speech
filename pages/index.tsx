@@ -53,23 +53,24 @@ const TextToSpeech: FC = () => {
     return new Blob([arrayBuffer], { type: mime });
   };
 
-
-
   const handleTextToSpeech = async () => {
     setLoading(true);
-    const response = await fetch('https://text-to-speech-blond.vercel.app/api/textToSpeech', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        text,
-        audioOption,
-        audioFormat,
-        audioSpeed,
-      }),
-    });
-    const {base64} = await response.json();
+    const response = await fetch(
+      'https://text-to-speech-blond.vercel.app/api/textToSpeech',
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          text,
+          audioOption,
+          audioFormat,
+          audioSpeed,
+        }),
+      }
+    );
+    const { base64 } = await response.json();
     const blob = base64ToBlob(base64, 'audio/mpeg');
     const file = new File([blob], 'speech.' + audioFormat, {
       type: 'audio/mpeg',
@@ -130,6 +131,7 @@ const TextToSpeech: FC = () => {
                 placeholder=""
                 value={text}
                 onChange={(event) => setText(event.currentTarget.value)}
+                maxLength={500}
                 minRows={8}
                 maxRows={8}
               />
@@ -264,12 +266,12 @@ const TextToSpeech: FC = () => {
               onChange={(value) =>
                 setAudioOption(
                   value as
-                  | 'alloy'
-                  | 'echo'
-                  | 'fable'
-                  | 'onyx'
-                  | 'nova'
-                  | 'shimmer'
+                    | 'alloy'
+                    | 'echo'
+                    | 'fable'
+                    | 'onyx'
+                    | 'nova'
+                    | 'shimmer'
                 )
               }
               value={audioOption}
