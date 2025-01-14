@@ -149,6 +149,7 @@ const Home: React.FC<HomeProps> = (props) => {
             style={{
               backgroundColor: app_theme === 'dark' ? '#000' : '#fff',
             }}
+            m={0}
           >
             <Grid.Col
               sx={() => ({
